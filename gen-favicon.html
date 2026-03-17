@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="c" width="64" height="64"></canvas>
+<script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = function() {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.drawImage(img, 0, 0, 64, 64);
+        const link = document.createElement('a');
+        link.download = 'favicon-white.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    };
+    img.src = 'CA logo without bg.png';
+</script>
+</body>
+</html>
