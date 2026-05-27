@@ -20,7 +20,7 @@
     </header>
 
     <section class="hero">
-        <p class="eyebrow">&#x1F525; Something big is launching soon</p>
+        <p class="eyebrow">&#9889; Something big is launching soon</p>
         <h1>The Future of <span>Freelancing</span><br>Starts Here.</h1>
         <p class="description">
             No more chasing clients. No more lowball offers. CodeAllrounders is a smarter freelance marketplace &mdash; built for people who mean business.
@@ -34,8 +34,11 @@
             </div>
             <p class="input-hint">Join people already on the waitlist. No spam, ever.</p>
             <div class="success-box" id="successBox">
-                <p class="success-title">&#x1F389; You're in!</p>
-                <p class="success-sub">We'll hit your inbox the moment we go live. Get ready &mdash; it's going to be worth it.</p>
+                <div class="success-icon">&#10003;</div>
+                <div>
+                    <p class="success-title">You're in!</p>
+                    <p class="success-sub">Check your inbox &mdash; we've sent you a confirmation. We'll reach out the moment we go live.</p>
+                </div>
             </div>
 
             <div class="status-section">
@@ -106,7 +109,7 @@
                     document.getElementById('formRow').style.display = 'none';
                     document.querySelector('.input-hint').style.display = 'none';
                     document.querySelector('.early-label').style.display = 'none';
-                    document.getElementById('successBox').style.display = 'block';
+                    document.getElementById('successBox').style.display = 'flex';
                 } else {
                     btn.textContent = 'Try again';
                     btn.disabled = false;
