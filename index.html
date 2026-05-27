@@ -6,10 +6,9 @@
     <title>CodeAllrounders | Coming Soon</title>
     <link rel="icon" type="image/png" href="ChatGPT Image Nov 16, 2025, 10_44_27 PM.png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas id="particles"></canvas>
 
     <header>
         <div class="logo">
@@ -17,128 +16,107 @@
                 <img src="CA logo without bg.png" alt="CodeAllrounders Logo" class="logo-img">
             </div>
             <span class="logo-name">Code Allrounders</span>
-            <p class="tagline">Connecting Skills, Delivering Success.</p>
         </div>
     </header>
 
-    <main class="content">
-        <div class="badge">🚀 Something big is coming</div>
-        <h1>COMING <span>SOON</span></h1>
+    <section class="hero">
+        <p class="eyebrow">&#x1F525; Something big is launching soon</p>
+        <h1>The Future of <span>Freelancing</span><br>Starts Here.</h1>
         <p class="description">
-            Our modern freelance marketplace is almost ready for you.<br>
-            Get ready to connect with skilled professionals or find your next great project.
+            No more chasing clients. No more lowball offers. CodeAllrounders is a smarter freelance marketplace &mdash; built for people who mean business.
         </p>
 
+        <div class="early-access">
+            <p class="early-label">Spots are limited. <strong>Get early access before we go live.</strong></p>
+            <div class="input-row" id="formRow">
+                <input type="email" id="emailInput" placeholder="Enter your Gmail address" />
+                <button onclick="handleSubmit()">Get Early Access &rarr;</button>
+            </div>
+            <p class="input-hint">Join people already on the waitlist. No spam, ever.</p>
+            <div class="success-box" id="successBox">
+                <p class="success-title">&#x1F389; You're in!</p>
+                <p class="success-sub">We'll hit your inbox the moment we go live. Get ready &mdash; it's going to be worth it.</p>
+            </div>
 
-
-
-
-        <div class="status-section">
-            <p>Launch Status: <span>Development</span></p>
-            <div class="progress-wrapper">
-                <div class="progress-bar">
-                    <div class="progress-fill" data-width="70"></div>
+            <div class="status-section">
+                <div class="status-left">
+                    <span class="status-label">Development Progress</span>
+                    <p class="status-sub">Almost there &mdash; launching very soon</p>
                 </div>
-                <span class="progress-label">70%</span>
+                <div class="status-right">
+                    <span class="status-value-inline">70%</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="70"></div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="features">
-            <div class="feature-card">
-                <div class="card-icon"><i class="fas fa-globe"></i></div>
-                <h3>For Clients</h3>
-                <p>Tap into a global network of vetted talent ready to bring your vision to life.</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
-                <h3>For Freelancers</h3>
-                <p>Land high-quality projects and build your dream career on your own terms.</p>
-            </div>
-            <div class="feature-card">
-                <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Trusted Platform</h3>
-                <p>Secure smart contracts and verifiable project portfolios you can rely on.</p>
-            </div>
+    <div class="bottom">
+        <div class="bottom-item">
+            <span class="card-label">For Clients</span>
+            <p class="card-text">Access a curated network of skilled freelancers ready to deliver results on time.</p>
         </div>
-    </main>
+        <div class="bottom-item">
+            <span class="card-label">For Freelancers</span>
+            <p class="card-text">Find quality projects that match your skills and build a career on your own terms.</p>
+        </div>
+        <div class="bottom-item">
+            <span class="card-label">Secure & Trusted</span>
+            <p class="card-text">Built-in contracts, verified profiles, and protected payments you can rely on.</p>
+        </div>
+    </div>
 
     <footer>
-        <p class="copyright">© 2026 Code Allrounders. All rights reserved.</p>
+        <p class="copyright">&copy; 2026 Code Allrounders. All rights reserved.</p>
     </footer>
 
     <script>
-        // Countdown Timer — set your launch date here
-        const launchDate = new Date('2026-01-01T00:00:00');
-        function updateCountdown() {
-            const now = new Date();
-            const diff = launchDate - now;
-            if (diff <= 0) return;
-            document.getElementById('days').textContent    = String(Math.floor(diff / 86400000)).padStart(2, '0');
-            document.getElementById('hours').textContent   = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Notify button
-        function handleNotify() {
-            const email = document.getElementById('emailInput').value;
-            if (!email || !email.includes('@')) {
-                document.getElementById('emailInput').style.borderBottom = '1px solid #ff6b6b';
-                return;
-            }
-            document.getElementById('successMsg').style.display = 'block';
-            document.getElementById('emailInput').value = '';
-        }
-
-        // Animate progress bar on load
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.querySelectorAll('.progress-fill').forEach(el => {
                     el.style.width = el.dataset.width + '%';
                 });
-            }, 500);
+            }, 400);
         });
 
-        // Particle canvas
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        function handleSubmit() {
+            const input = document.getElementById('emailInput');
+            const btn = document.querySelector('button');
+            const email = input.value.trim();
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
+            if (!email || !email.includes('@')) {
+                input.classList.add('error');
+                setTimeout(() => input.classList.remove('error'), 800);
+                return;
+            }
 
-        for (let i = 0; i < 60; i++) {
-            particles.push({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                r: Math.random() * 2 + 0.5,
-                dx: (Math.random() - 0.5) * 0.4,
-                dy: (Math.random() - 0.5) * 0.4,
-                alpha: Math.random() * 0.5 + 0.2
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('formRow').style.display = 'none';
+                    document.querySelector('.input-hint').style.display = 'none';
+                    document.querySelector('.early-label').style.display = 'none';
+                    document.getElementById('successBox').style.display = 'block';
+                } else {
+                    btn.textContent = 'Try again';
+                    btn.disabled = false;
+                }
+            })
+            .catch(() => {
+                btn.textContent = 'Try again';
+                btn.disabled = false;
             });
         }
-
-        function drawParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(66, 232, 224, ${p.alpha})`;
-                ctx.fill();
-                p.x += p.dx;
-                p.y += p.dy;
-                if (p.x < 0 || p.x > canvas.width)  p.dx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-            });
-            requestAnimationFrame(drawParticles);
-        }
-        drawParticles();
     </script>
 </body>
 </html>
