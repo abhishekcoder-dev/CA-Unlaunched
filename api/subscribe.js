@@ -1,6 +1,4 @@
-import https from 'https';
 
-const recentlySent = new Map();
 
 function getHtml() {
     return `<!DOCTYPE html>
@@ -100,37 +98,24 @@ function getHtml() {
 }
 
 function sendEmail(email) {
-    return new Promise((resolve) => {
-        const payload = JSON.stringify({
+    return fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
             from: 'Code Allrounders <hello@codeallrounders.com>',
             to: email,
             subject: "You're on the list! Early access confirmed.",
             html: getHtml()
-        });
-
-        const options = {
-            hostname: 'api.resend.com',
-            path: '/emails',
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(payload)
-            }
-        };
-
-        const request = https.request(options, (response) => {
-            let data = '';
-            response.on('data', chunk => data += chunk);
-            response.on('end', () => {
-                resolve({ ok: response.statusCode === 200 || response.statusCode === 201, data });
-            });
-        });
-
-        request.on('error', (err) => resolve({ ok: false, data: err.message }));
-        request.write(payload);
-        request.end();
-    });
+        })
+    })
+    .then(async response => {
+        const text = await response.text();
+        return { ok: response.ok, data: text };
+    })
+    .catch(err => ({ ok: false, data: err.message }));
 }
 
 export default async function handler(req, res) {
@@ -144,23 +129,9 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid email' });
     }
 
-    // Deduplicate — same email within 60s gets success without resending
-    const now = Date.now();
-    if (recentlySent.has(email) && now - recentlySent.get(email) < 60000) {
-        return res.status(200).json({ success: true });
-    }
-
-    // First attempt
-    let result = await sendEmail(email);
-
-    // Only retry if first attempt failed
-    if (!result.ok) {
-        await new Promise(r => setTimeout(r, 2000));
-        result = await sendEmail(email);
-    }
+    const result = await sendEmail(email);
 
     if (result.ok) {
-        recentlySent.set(email, Date.now());
         return res.status(200).json({ success: true });
     } else {
         return res.status(500).json({ error: result.data });

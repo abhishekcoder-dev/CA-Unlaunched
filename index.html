@@ -98,37 +98,27 @@
             btn.textContent = 'Sending...';
             btn.disabled = true;
 
-            function call() {
-                return fetch('/api/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
-                }).then(r => r.json()).catch(() => ({ success: false }));
-            }
-
-            // First call immediately, second call after 3s regardless
-            call().then(data => {
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            })
+            .then(res => res.json())
+            .then(data => {
                 if (data.success) {
                     document.getElementById('formRow').style.display = 'none';
                     document.querySelector('.input-hint').style.display = 'none';
                     document.querySelector('.early-label').style.display = 'none';
                     document.getElementById('successBox').style.display = 'flex';
+                } else {
+                    btn.textContent = 'Try again';
+                    btn.disabled = false;
                 }
+            })
+            .catch(() => {
+                btn.textContent = 'Try again';
+                btn.disabled = false;
             });
-
-            setTimeout(() => {
-                call().then(data => {
-                    if (data.success) {
-                        document.getElementById('formRow').style.display = 'none';
-                        document.querySelector('.input-hint').style.display = 'none';
-                        document.querySelector('.early-label').style.display = 'none';
-                        document.getElementById('successBox').style.display = 'flex';
-                    } else {
-                        btn.textContent = 'Try again';
-                        btn.disabled = false;
-                    }
-                });
-            }, 3000);
         }
     </script>
 </body>
