@@ -88,7 +88,7 @@ export default async function handler(req, res) {
                                         <table cellpadding="0" cellspacing="0" width="100%">
                                             <tr>
                                                 <td style="width:32px;vertical-align:top;padding-top:2px;">
-                                                    <img src="https://img.icons8.com/ios/50/18181b/globe--v1.png" width="16" height="16" alt="clients" style="display:block;" />
+                                                    <span style="display:inline-block;width:16px;height:16px;background:#18181b;border-radius:3px;text-align:center;line-height:16px;font-size:10px;color:#fff;font-weight:700;">C</span>
                                                 </td>
                                                 <td>
                                                     <p style="margin:0;font-size:13px;font-weight:600;color:#18181b;">For Clients</p>
@@ -103,7 +103,7 @@ export default async function handler(req, res) {
                                         <table cellpadding="0" cellspacing="0" width="100%">
                                             <tr>
                                                 <td style="width:32px;vertical-align:top;padding-top:2px;">
-                                                    <img src="https://img.icons8.com/ios/50/18181b/laptop-coding.png" width="16" height="16" alt="freelancers" style="display:block;" />
+                                                    <span style="display:inline-block;width:16px;height:16px;background:#18181b;border-radius:3px;text-align:center;line-height:16px;font-size:10px;color:#fff;font-weight:700;">F</span>
                                                 </td>
                                                 <td>
                                                     <p style="margin:0;font-size:13px;font-weight:600;color:#18181b;">For Freelancers</p>
@@ -118,7 +118,7 @@ export default async function handler(req, res) {
                                         <table cellpadding="0" cellspacing="0" width="100%">
                                             <tr>
                                                 <td style="width:32px;vertical-align:top;padding-top:2px;">
-                                                    <img src="https://img.icons8.com/ios/50/18181b/shield.png" width="16" height="16" alt="secure" style="display:block;" />
+                                                    <span style="display:inline-block;width:16px;height:16px;background:#18181b;border-radius:3px;text-align:center;line-height:16px;font-size:10px;color:#fff;font-weight:700;">S</span>
                                                 </td>
                                                 <td>
                                                     <p style="margin:0;font-size:13px;font-weight:600;color:#18181b;">Secure & Trusted</p>
@@ -162,7 +162,7 @@ export default async function handler(req, res) {
     const payload = JSON.stringify({
         from: 'Code Allrounders <hello@codeallrounders.com>',
         to: email,
-        subject: "You're on the list — early access confirmed.",
+        subject: "You're on the list! Early access confirmed.",
         html
     });
 
