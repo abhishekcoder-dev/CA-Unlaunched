@@ -1,5 +1,7 @@
 import https from 'https';
 
+const recentlySent = new Map();
+
 function getHtml() {
     return `<!DOCTYPE html>
 <html lang="en">
@@ -142,6 +144,12 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid email' });
     }
 
+    // Deduplicate — same email within 60s gets success without resending
+    const now = Date.now();
+    if (recentlySent.has(email) && now - recentlySent.get(email) < 60000) {
+        return res.status(200).json({ success: true });
+    }
+
     // First attempt
     let result = await sendEmail(email);
 
@@ -152,6 +160,7 @@ export default async function handler(req, res) {
     }
 
     if (result.ok) {
+        recentlySent.set(email, Date.now());
         return res.status(200).json({ success: true });
     } else {
         return res.status(500).json({ error: result.data });
